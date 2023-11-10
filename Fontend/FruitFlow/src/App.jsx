@@ -7,6 +7,7 @@ import Cartpage from './pages/Cartpage'
 import Profilepage from './pages/Profilepage'
 import Notificationpage from './pages/Notificationpage'
 import Searchpage from './pages/Searchpage'
+import Aboutpage from './pages/Aboutpage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/notification' element={<Notificationpage />} />
           <Route path='/profile' element={<Profilepage />} />
           <Route path='search' element={<Searchpage />} />
+          <Route path='aboutus' element={<Aboutpage />} />
         </Route>
       </Routes>
     </BrowserRouter>

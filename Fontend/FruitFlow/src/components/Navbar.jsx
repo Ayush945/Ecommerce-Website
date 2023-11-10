@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 function Navbar() {
     return (
         <>
-            <div className=' flex justify-around bg-green-300 p-5 items-center cursor-pointer'>
+            <div className=' flex justify-between bg-green-300 p-5 items-center cursor-pointer md:justify-around'>
                 <div className='font-bold ml-10 text-2xl'>
                     <Link to={'/home'}><p className=' text-gray-600 hover:text-white'>FRUIT FLOW</p></Link>
                 </div>
