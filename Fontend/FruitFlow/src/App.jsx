@@ -8,6 +8,8 @@ import Profilepage from './pages/Profilepage'
 import Notificationpage from './pages/Notificationpage'
 import Searchpage from './pages/Searchpage'
 import Aboutpage from './pages/Aboutpage'
+import Loginpage from './pages/Login-Page/Loginpage'
+import Registerpage from './pages/Login-Page/Registerpage'
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
           <Route path='search' element={<Searchpage />} />
           <Route path='aboutus' element={<Aboutpage />} />
         </Route>
+
+        <Route path='/login' element={<Loginpage />} />
+        <Route path='/register' element={<Registerpage />} />
       </Routes>
     </BrowserRouter>
   )
