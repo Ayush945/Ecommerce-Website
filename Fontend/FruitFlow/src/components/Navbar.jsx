@@ -1,9 +1,14 @@
 import { faBell, faPerson, faSearch, faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+    }
     return (
         <>
             <div className=' flex justify-between bg-green-300 p-5 items-center cursor-pointer md:justify-around'>
@@ -15,7 +20,19 @@ function Navbar() {
                     <Link to={'/search'} ><p className='hover:text-white'><FontAwesomeIcon icon={faSearch} /></p></Link>
                     <Link to={'/cart'}> <p className='hover:text-white'><FontAwesomeIcon icon={faShoppingBag} /></p></Link>
                     <Link to={'/notification'}><p className='hover:text-white'><FontAwesomeIcon icon={faBell} /></p></Link>
-                    <Link to={'/profile'}><p className='hover:text-white'><FontAwesomeIcon icon={faUser} /></p></Link>
+                    {isLoggedIn ? (
+                        <>
+                            <Link to={'/profile'}><p className='hover:text-white'><FontAwesomeIcon icon={faUser} /></p></Link>
+                            <button onClick={handleLogout} className='hover:text-white'></button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to={'/login'}>
+                                <button className='hover:text-white'>Login</button>
+                            </Link>
+                        </>
+                    )}
+
                 </div>
             </div>
         </>

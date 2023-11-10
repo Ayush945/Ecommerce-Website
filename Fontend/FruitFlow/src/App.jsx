@@ -10,6 +10,7 @@ import Searchpage from './pages/Searchpage'
 import Aboutpage from './pages/Aboutpage'
 import Loginpage from './pages/Login-Page/Loginpage'
 import Registerpage from './pages/Login-Page/Registerpage'
+import RoleChoose from './pages/Login-Page/RoleChoose'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
         <Route path='/login' element={<Loginpage />} />
         <Route path='/register' element={<Registerpage />} />
+        <Route path='choserole' element={<RoleChoose />} />
       </Routes>
     </BrowserRouter>
   )
