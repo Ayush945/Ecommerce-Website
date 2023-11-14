@@ -28,7 +28,7 @@ function App() {
 
         <Route path='/login' element={<Loginpage />} />
         <Route path='/register' element={<Registerpage />} />
-        <Route path='choserole' element={<RoleChoose />} />
+        <Route path='chooserole' element={<RoleChoose />} />
       </Routes>
     </BrowserRouter>
   )

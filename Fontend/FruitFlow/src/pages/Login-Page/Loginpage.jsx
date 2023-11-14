@@ -24,7 +24,7 @@ function Loginpage() {
                     >Login</button>
                 </form>
                 <div className=''>
-                    <p>Not a Register User? <Link to={'/choserole'} className='text-green-500 hover:underline hover:text-green-800'>Register Now</Link></p>
+                    <p>Not a Register User? <Link to={'/chooserole'} className='text-green-500 hover:underline hover:text-green-800'>Register Now</Link></p>
                 </div>
             </div>
 
