@@ -96,18 +96,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
-       LoginResponseDTO loginResponseDTO;
-       if(loginRequestDTO.getRole().equals(RoleEnum.ROLE_ADMIN)){
-           loginResponseDTO=loginAsAdmin(loginRequestDTO.getUsername(),loginRequestDTO.getPassword());
-       } else if (loginRequestDTO.getRole().equals(RoleEnum.ROLE_TRADER)) {
-           loginResponseDTO=loginAsTrader(loginRequestDTO.getUsername(),loginRequestDTO.getPassword());
-
+       String username=loginRequestDTO.getUsername();
+       String password=loginRequestDTO.getPassword();
+       Optional<Admin>admin=adminRepository.findByUsername(username);
+       Optional<Customer>customer=customerRepository.findByUsername(username);
+       Optional<Trader>trader=traderRepository.findByUsername(username);
+       if(customer.isPresent()){
+           return loginAsCustomer(username,password);
+       } else if (admin.isPresent()) {
+           return loginAsAdmin(username,password);
+       } else if (trader.isPresent()) {
+           return loginAsTrader(username,password);
        }
        else {
-            loginResponseDTO=loginAsCustomer(loginRequestDTO.getUsername(),loginRequestDTO.getPassword());
+           throw new RuntimeException("User not found");
        }
-       return loginResponseDTO;
-
     }
 
     private LoginResponseDTO loginAsCustomer(String username, String password) {
