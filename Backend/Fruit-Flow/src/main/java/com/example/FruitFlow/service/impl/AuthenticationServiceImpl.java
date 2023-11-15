@@ -113,7 +113,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
        }
     }
 
-    private LoginResponseDTO loginAsCustomer(String username, String password) {
+    private LoginResponseDTO  loginAsCustomer(String username, String password) {
         CustomerDTO customerDTO=getCustomerByUsername(username);
         return authenticate(customerDTO,password,customerDTO.getRole());
     }

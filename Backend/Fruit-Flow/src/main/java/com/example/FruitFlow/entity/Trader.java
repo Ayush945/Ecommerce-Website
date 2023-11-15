@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +21,8 @@ public class Trader extends User{
     private Long traderId;
 
     private final RoleEnum role=RoleEnum.ROLE_TRADER;
+
+    @OneToOne(mappedBy = "trader")
+    @JoinColumn(name = "item_id")
+    private Item item;
 }
