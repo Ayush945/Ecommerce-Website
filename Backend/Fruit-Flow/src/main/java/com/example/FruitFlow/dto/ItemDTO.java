@@ -1,24 +1,19 @@
-package com.example.FruitFlow.entity;
+package com.example.FruitFlow.dto;
 
+import com.example.FruitFlow.entity.Trader;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Builder
+public class ItemDTO {
     private Long itemId;
     private String itemName;
     private String itemPrice;
     private String itemQuantity;
-
-    @OneToOne(mappedBy = "item")
     private Trader trader;
 }
