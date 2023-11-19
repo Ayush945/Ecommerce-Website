@@ -2,17 +2,23 @@ package com.example.FruitFlow.service.impl;
 
 import com.example.FruitFlow.dto.ItemDTO;
 import com.example.FruitFlow.entity.Item;
+import com.example.FruitFlow.entity.Trader;
 import com.example.FruitFlow.repository.ItemRepository;
+import com.example.FruitFlow.repository.TraderRepository;
 import com.example.FruitFlow.service.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private TraderRepository traderRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -31,9 +37,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTO addItem(ItemDTO itemDTO) {
+    public ItemDTO addItem(Long traderId,ItemDTO itemDTO) {
+        Trader trader=traderRepository.findById(traderId);
         Item item=modelMapper.map(itemDTO,Item.class);
-        itemRepository.save(item);
+        trader.setItem(item);
+        traderRepository.save(trader);
         return itemDTO;
     }
 
@@ -53,5 +61,13 @@ public class ItemServiceImpl implements ItemService {
         }
         Item updateItem=itemRepository.save(existingItem);
         return modelMapper.map(updateItem,ItemDTO.class);
+    }
+
+    @Override
+    public ItemDTO getTraderItemById(Long traderId) {
+        Trader trader=traderRepository.findById(traderId)
+                .orElseThrow(()->new RuntimeException("Trader not found"));
+        Item item=trader.getItem();
+        return modelMapper.map(item,ItemDTO.class);
     }
 }

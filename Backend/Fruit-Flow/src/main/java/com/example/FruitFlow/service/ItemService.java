@@ -9,7 +9,9 @@ public interface ItemService {
 
     ItemDTO getItemById(Long itemId);
 
-    ItemDTO addItem(ItemDTO itemDTO);
+    ItemDTO addItem(Long traderId,ItemDTO itemDTO);
 
     ItemDTO updateItem(ItemDTO itemDTO);
+
+    ItemDTO getTraderItemById(Long traderId);
 }

@@ -22,9 +22,13 @@ public class ItemController {
         return ResponseEntity.ok().body(itemService.getItemById(itemId));
     }
 
-    @PostMapping("add-item")
-    public ResponseEntity<ItemDTO>addItem(@RequestBody ItemDTO itemDTO){
-        return ResponseEntity.ok().body(itemService.addItem(itemDTO));
+    @GetMapping("get-trader-item/{traderId}")
+    public ResponseEntity<ItemDTO>getTraderItemById(@PathVariable("traderId") Long traderId){
+        return ResponseEntity.ok().body(itemService.getTraderItemById(traderId));
+    }
+    @PostMapping("add-item/{traderId}")
+    public ResponseEntity<ItemDTO>addItem(@PathVariable ("traderId") Long traderId, @RequestBody ItemDTO itemDTO){
+        return ResponseEntity.ok().body(itemService.addItem(traderId,itemDTO));
     }
     @PutMapping("update-item")
     public ResponseEntity<ItemDTO>updateItem(@RequestBody ItemDTO itemDTO){

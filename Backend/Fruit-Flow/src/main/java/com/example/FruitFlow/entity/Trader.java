@@ -22,7 +22,6 @@ public class Trader extends User{
 
     private final RoleEnum role=RoleEnum.ROLE_TRADER;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_id")
+    @OneToOne(mappedBy = "trader")
     private Item item;
 }

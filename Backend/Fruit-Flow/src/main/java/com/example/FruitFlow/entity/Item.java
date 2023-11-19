@@ -19,6 +19,8 @@ public class Item {
     private String itemPrice;
     private String itemQuantity;
 
-    @OneToOne(mappedBy = "item")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+
     private Trader trader;
 }
