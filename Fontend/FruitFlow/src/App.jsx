@@ -14,9 +14,6 @@ import RoleChoose from './pages/Login-Page/RoleChoose'
 import Cookies from 'js-cookie'
 
 function App() {
-
-  const isAuthenticated = () => !!Cookies.get('access_token');
-
   return (
     <BrowserRouter>
       <Routes>
@@ -28,8 +25,8 @@ function App() {
           <Route path='/notification' element={<Notificationpage />} />
 
           <Route path='/profile'
-            element={isAuthenticated() ? (
-              <Profilepage />) : (<Navigate to={'/home'} replace />)
+            element={
+              <Profilepage />
             }
 
           />
@@ -41,9 +38,9 @@ function App() {
         <Route
           path='/login'
           element={
-            isAuthenticated() ?
-              (<Navigate to={"/home"} replace />)
-              : (<Loginpage />)
+
+
+            <Loginpage />
           }
         />
 

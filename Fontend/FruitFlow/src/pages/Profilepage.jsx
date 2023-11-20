@@ -2,15 +2,16 @@ import Cookies from 'js-cookie'
 import React from 'react'
 import { useNavigate } from 'react-router';
 
-function Profilepage({ setAuthenticated }) {
+function Profilepage() {
     const navigate = useNavigate();
 
 
     const handleLogout = () => {
         Cookies.remove('access_token');
         Cookies.remove('user');
-        setAuthenticated(false);
-        navigate("/home")
+        navigate("/home");
+        console.log("Logout", Cookies.get('access_token'));
+        window.location.reload();
     }
     return (
         <>

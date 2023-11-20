@@ -1,11 +1,25 @@
 import { faBell, faPerson, faSearch, faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Cookies from 'js-cookie';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
-    const accessToken = Cookies.get('access_token');
+    //const accessToken = Cookies.get('access_token');
+    const [authenticated, setAuthenticated] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        console.log("Access Token", accessToken);
+        setAuthenticated(!!accessToken);
+
+        setLoaded(true)
+        console.log("First", authenticated);
+    }, [])
+    useEffect(() => {
+        console.log("Authenticated", authenticated);
+    }, [authenticated])
     return (
         <>
             <div className=' flex justify-between bg-green-300 p-5 items-center cursor-pointer md:justify-around'>
@@ -17,9 +31,14 @@ function Navbar() {
                     <Link to={'/search'} ><p className='hover:text-white'><FontAwesomeIcon icon={faSearch} /></p></Link>
                     <Link to={'/cart'}> <p className='hover:text-white'><FontAwesomeIcon icon={faShoppingBag} /></p></Link>
                     <Link to={'/notification'}><p className='hover:text-white'><FontAwesomeIcon icon={faBell} /></p></Link>
-                    {accessToken ? (
+
+                    {authenticated && loaded ? (
                         <>
-                            <Link to={'/profile'}><p className='hover:text-white'><FontAwesomeIcon icon={faUser} /></p></Link>
+                            <Link to={'/profile'}>
+                                <p className='hover:text-white'>
+                                    <FontAwesomeIcon icon={faUser} />
+                                </p>
+                            </Link>
 
                         </>
                     ) : (

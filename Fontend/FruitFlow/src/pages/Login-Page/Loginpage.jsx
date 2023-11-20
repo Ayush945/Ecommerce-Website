@@ -11,6 +11,7 @@ function Loginpage() {
     const [loginMessage, setLoginMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -25,7 +26,6 @@ function Loginpage() {
                 const { accessToken, user } = response.data;
                 Cookies.set('access_token', accessToken);
                 Cookies.set('user', JSON.stringify(user));
-                console.log(Cookies.get('access_token'))
                 navigate('/home');
             }
             else {
