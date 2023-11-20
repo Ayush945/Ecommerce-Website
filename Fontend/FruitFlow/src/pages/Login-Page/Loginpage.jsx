@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import baseUrl from './../CorsConfigure/BaseUrl';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 function Loginpage() {
+
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginMessage, setLoginMessage] = useState(null);
-
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             const response = await axios.post(baseUrl + 'api/login', {
                 username,
                 password,
             });
 
-            // Assuming your backend sends a success message
-            setLoginMessage('Login successful!');
+            if (response.status === 200) {
+                const { accessToken, user } = response.data;
+                Cookies.set('access_token', accessToken);
+                Cookies.set('user', JSON.stringify(user));
+                console.log(Cookies.get('access_token'))
+                navigate('/home');
+            }
+            else {
+                setLoginMessage("Login failed. Please check your credentials.")
+            }
+
+
         } catch (error) {
-            // Assuming your backend sends an error message
-            setLoginMessage('Login failed. Please check your credentials.');
+
+            const errorMessage =
+                error.response?.data?.message || 'Login failed. Please check your credentials.';
+            setLoginMessage(errorMessage);
             console.error('Error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -46,8 +65,8 @@ function Loginpage() {
                         className='mb-3 p-1'
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button type='submit' className='bg-grey-400'>
-                        Login
+                    <button type='submit' className='bg-grey-400' disabled={loading}>
+                        {loading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
                 {loginMessage && (

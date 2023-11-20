@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import baseUrl from '../CorsConfigure/BaseUrl';
 
 function Registerpage() {
     const { role: urlRole } = useParams(); // Use a different name to avoid conflicts
     const [role, setRole] = useState(urlRole || 'defaultRole');
     const [registationStatus, setRegistrationStatus] = useState(false);
-    const [failedStatus, setFailedStatus] = useState(false)
+    const [failedStatus, setFailedStatus] = useState(false);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         fullname: '',
@@ -36,6 +37,7 @@ function Registerpage() {
             const response = await axios.post(apiEndpoint, formData);
             console.log(response.data);
             setRegistrationStatus(true);
+            navigate("/home");
         } catch (error) {
             console.error("Error: ", error);
             setFailedStatus(true);

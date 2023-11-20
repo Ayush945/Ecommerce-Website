@@ -1,8 +1,23 @@
+import Cookies from 'js-cookie'
 import React from 'react'
+import { useNavigate } from 'react-router';
 
-function Profilepage() {
+function Profilepage({ setAuthenticated }) {
+    const navigate = useNavigate();
+
+
+    const handleLogout = () => {
+        Cookies.remove('access_token');
+        Cookies.remove('user');
+        setAuthenticated(false);
+        navigate("/home")
+    }
     return (
-        <div>Profilepage</div>
+        <>
+            <button onClick={handleLogout}>
+                Logout
+            </button>
+        </>
     )
 }
 
