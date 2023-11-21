@@ -77,6 +77,7 @@ function Loginpage() {
                         placeholder='Username'
                         className='mb-3 p-1'
                         onChange={(e) => setUsername(e.target.value)}
+                        required
                     />
                     <label>Password</label>
                     <input
@@ -84,6 +85,7 @@ function Loginpage() {
                         placeholder='Password'
                         className='mb-3 p-1'
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                     <button type='submit' className='bg-grey-400' disabled={loading}>
                         {loading ? 'Logging in...' : 'Login'}

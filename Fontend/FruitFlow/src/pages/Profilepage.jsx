@@ -29,6 +29,9 @@ function Profilepage() {
                     <p>
                         <span className="font-semibold">Address:</span> {userObject.address}
                     </p>
+                    <p>
+                        <span className="font-semibold">Email:</span> {userObject.email}
+                    </p>
                 </div>
             ) : (
                 <p className="text-red-500">No information available.</p>

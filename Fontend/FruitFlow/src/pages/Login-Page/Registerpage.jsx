@@ -4,21 +4,23 @@ import { useNavigate, useParams } from 'react-router-dom';
 import baseUrl from '../CorsConfigure/BaseUrl';
 
 function Registerpage() {
-    const { role: urlRole } = useParams(); // Use a different name to avoid conflicts
+    const { role: urlRole } = useParams();
     const [role, setRole] = useState(urlRole || 'defaultRole');
     const [registationStatus, setRegistrationStatus] = useState(false);
     const [failedStatus, setFailedStatus] = useState(false);
     const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: '',
         fullName: '',
         email: '',
+        address: '',
         password: '',
         role: role,
     });
 
     useEffect(() => {
-        // Update role in the state when the URL parameter changes
+
         setRole(urlRole || 'defaultRole');
     }, [urlRole]);
 
@@ -66,7 +68,7 @@ function Registerpage() {
                         type='text'
                         placeholder='Full Name'
                         className='mb-1 p-1'
-                        name='fullname'
+                        name='fullName'
                         value={formData.fullName}
                         onChange={handleChange}
                     />
@@ -78,6 +80,15 @@ function Registerpage() {
                         className='mb-1 p-1'
                         name='email'
                         value={formData.email}
+                        onChange={handleChange}
+                    />
+                    <label>Address</label>
+                    <input
+                        type='text'
+                        placeholder='Address'
+                        className='mb-1 p-1'
+                        name='address'
+                        value={formData.address}
                         onChange={handleChange}
                     />
 
@@ -98,7 +109,7 @@ function Registerpage() {
                         </div>
                     )}
                     {failedStatus && (
-                        <div className='text-red-600' mt-2>
+                        <div className='text-red-600 mt-2'>
                             Registration Failed
                         </div>
                     )}
