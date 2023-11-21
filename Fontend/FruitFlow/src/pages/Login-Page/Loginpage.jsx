@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import baseUrl from './../CorsConfigure/BaseUrl';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 function Loginpage() {
 
 
@@ -21,16 +22,35 @@ function Loginpage() {
                 username,
                 password,
             });
+            const { accessToken, user } = response.data;
+            try {
+                const decodeToken = jwtDecode(accessToken);
 
-            if (response.status === 200) {
-                const { accessToken, user } = response.data;
-                Cookies.set('access_token', accessToken);
-                Cookies.set('user', JSON.stringify(user));
-                navigate('/home');
+                const roles = decodeToken.roles[0];
+                if (roles === 'ROLE_ADMIN') {
+
+                    Cookies.set('access_token', accessToken);
+                    Cookies.set('user', JSON.stringify(user));
+                    navigate('/adminDashboard');
+                }
+                else if (roles === 'ROLE_TRADER') {
+                    Cookies.set('access_token', accessToken);
+                    Cookies.set('user', JSON.stringify(user));
+                    navigate('/traderDashboard');
+                }
+                else if (roles === 'ROLE_CUSTOMER') {
+                    Cookies.set('access_token', accessToken);
+                    Cookies.set('user', JSON.stringify(user));
+                    navigate('/home');
+                }
+                else {
+                    setLoginMessage("Login failed. Please check your credentials.")
+                }
             }
-            else {
-                setLoginMessage("Login failed. Please check your credentials.")
+            catch (error) {
+                console.error(error);
             }
+
 
 
         } catch (error) {

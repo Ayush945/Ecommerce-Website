@@ -12,6 +12,8 @@ import Loginpage from './pages/Login-Page/Loginpage'
 import Registerpage from './pages/Login-Page/Registerpage'
 import RoleChoose from './pages/Login-Page/RoleChoose'
 import Cookies from 'js-cookie'
+import AdminDashboard from './pages/AdminDashboardFolder/AdminDashboard'
+import TraderDashboard from './pages/TraderDashboardFolder/TraderDashboard'
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
 
         <Route path='/register/:role' element={<Registerpage />} />
         <Route path='chooserole' element={<RoleChoose />} />
+        <Route path='adminDashboard' element={<AdminDashboard />} />
+        <Route path='traderDashboard' element={<TraderDashboard />} />
       </Routes>
     </BrowserRouter>
   )

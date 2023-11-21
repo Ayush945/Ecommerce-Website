@@ -11,14 +11,12 @@ function Navbar() {
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
-        console.log("Access Token", accessToken);
         setAuthenticated(!!accessToken);
 
         setLoaded(true)
-        console.log("First", authenticated);
     }, [])
     useEffect(() => {
-        console.log("Authenticated", authenticated);
+
     }, [authenticated])
     return (
         <>

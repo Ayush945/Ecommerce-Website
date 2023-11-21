@@ -11,7 +11,7 @@ function Registerpage() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
-        fullname: '',
+        fullName: '',
         email: '',
         password: '',
         role: role,
@@ -37,7 +37,7 @@ function Registerpage() {
             const response = await axios.post(apiEndpoint, formData);
             console.log(response.data);
             setRegistrationStatus(true);
-            navigate("/home");
+            navigate("/login");
         } catch (error) {
             console.error("Error: ", error);
             setFailedStatus(true);
@@ -67,7 +67,7 @@ function Registerpage() {
                         placeholder='Full Name'
                         className='mb-1 p-1'
                         name='fullname'
-                        value={formData.fullname}
+                        value={formData.fullName}
                         onChange={handleChange}
                     />
 
