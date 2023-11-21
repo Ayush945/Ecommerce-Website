@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import baseUrl from './../CorsConfigure/BaseUrl';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router';
 
 function TraderDashboard() {
     const [message, setMessage] = useState(false);
     const [failedStatus, setFailedStatus] = useState(false);
-
+    const navigate = useNavigate()
     const userDetail = Cookies.get('user');
     const userObject = JSON.parse(userDetail);
 
@@ -40,6 +41,9 @@ function TraderDashboard() {
             setFailedStatus(true);
         }
     };
+    const handleLogout = () => {
+        navigate('/home')
+    }
 
     return (
         <>
@@ -96,6 +100,7 @@ function TraderDashboard() {
                         Failed
                     </div>
                 )}
+                <button onClick={handleLogout}>Exit</button>
             </div>
         </>
     );
