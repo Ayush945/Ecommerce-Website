@@ -15,5 +15,5 @@ public class ItemDTO {
     private String itemName;
     private String itemPrice;
     private String itemQuantity;
-    private Trader trader;
+
 }

@@ -20,7 +20,7 @@ public class Item {
     private String itemQuantity;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "trader_id")
 
     private Trader trader;
 }

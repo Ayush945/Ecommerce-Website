@@ -24,8 +24,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> getAllItems() {
         List<Item> items=itemRepository.findAll();
+
         return items.stream()
-                .map(item -> modelMapper.map(items,ItemDTO.class))
+                .map(item -> modelMapper.map(item,ItemDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -38,11 +39,13 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDTO addItem(Long traderId,ItemDTO itemDTO) {
-        Trader trader=traderRepository.findById(traderId);
+        Trader trader=traderRepository.findById(traderId)
+                .orElseThrow(()->new RuntimeException("Trader not found"));
+
         Item item=modelMapper.map(itemDTO,Item.class);
-        trader.setItem(item);
-        traderRepository.save(trader);
-        return itemDTO;
+        item.setTrader(trader);
+        itemRepository.save(item);
+        return modelMapper.map(item,ItemDTO.class);
     }
 
     @Override

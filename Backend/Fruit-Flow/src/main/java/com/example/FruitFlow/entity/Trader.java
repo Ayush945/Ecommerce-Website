@@ -22,6 +22,7 @@ public class Trader extends User{
 
     private final RoleEnum role=RoleEnum.ROLE_TRADER;
 
-    @OneToOne(mappedBy = "trader")
+    @OneToOne
+    @JoinColumn(name = "trader_id")
     private Item item;
 }
