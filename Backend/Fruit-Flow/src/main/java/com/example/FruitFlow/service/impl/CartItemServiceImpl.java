@@ -24,8 +24,7 @@ public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository;
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private CartService cartService;
+
     @Autowired
     private CartRepository cartRepository;
     @Autowired
@@ -40,19 +39,29 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItemDTO addItemToCart(Long customerId, Long itemId) {
-       Cart cart=cartRepository.findByCustomerCustomerId(customerId)
-               .orElseThrow(()->new RuntimeException("Not Found"));
-       Item item= itemRepository.findById(itemId)
-               .orElseThrow(()->new RuntimeException("Not Found"));
-        CartItem cartItem=new CartItem();
-        cartItem.setItem(item);
-        cartItem.setCart(cart);
-        CartItem savedCartItem=cartItemRepository.save(cartItem);
-        return modelMapper.map(savedCartItem,CartItemDTO.class);
+        Cart cart = cartRepository.findByCustomerCustomerId(customerId)
+                .orElseThrow(() -> new RuntimeException("Not Found"));
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Not Found"));
+        if (cartItemRepository.findByItemItemId(itemId).isPresent()) {
+            throw new RuntimeException("Item Already Added");
+        } else {
+            Double totalPrice = cart.getTotalPrice();
+            cart.setTotalPrice(item.getItemPrice() + totalPrice);
+            cartRepository.save(cart);
+
+            CartItem cartItem = new CartItem();
+            cartItem.setQuantity(1);
+            cartItem.setItem(item);
+            cartItem.setCart(cart);
+            CartItem savedCartItem = cartItemRepository.save(cartItem);
+
+            return modelMapper.map(savedCartItem, CartItemDTO.class);
+        }
     }
     @Override
     public void deleteCartItem(Long itemId){
-        CartItem cartItem=cartItemRepository.findById(itemId)
+        CartItem cartItem=cartItemRepository.findByItemItemId(itemId)
                 .orElseThrow(()->new RuntimeException("Not Found"));
         cartItemRepository.delete(cartItem);
     }

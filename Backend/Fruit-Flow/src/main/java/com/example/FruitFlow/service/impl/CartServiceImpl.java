@@ -31,6 +31,7 @@ public class CartServiceImpl implements CartService {
         Customer customer=customerRepository.findById(customerId)
                 .orElseThrow(()->new RuntimeException("Customer not found"));
         cart.setCustomer(customer);
+        cart.setTotalPrice(0.0);
         Cart savedCart=cartRepository.save(cart);
         return modelMapper.map(savedCart,CartDTO.class);
     }

@@ -19,7 +19,6 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
-    private Integer quantity;
     private Double totalPrice;
 
     @OneToOne(cascade = CascadeType.ALL)

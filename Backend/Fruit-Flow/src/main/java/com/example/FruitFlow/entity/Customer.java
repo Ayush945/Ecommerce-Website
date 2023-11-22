@@ -18,8 +18,8 @@ public class Customer extends User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
     private final RoleEnum role=RoleEnum.ROLE_CUSTOMER;
-
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Cart cart;
+//
+//    @OneToOne
+//    @JoinColumn(name = "customer_id")
+//    private Cart cart;
 }

@@ -9,6 +9,7 @@ import com.example.FruitFlow.repository.AdminRepository;
 import com.example.FruitFlow.repository.CustomerRepository;
 import com.example.FruitFlow.repository.TraderRepository;
 import com.example.FruitFlow.service.AuthenticationService;
+import com.example.FruitFlow.service.CartService;
 import com.example.FruitFlow.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -40,7 +41,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private AdminRepository adminRepository;
-
+    @Autowired
+    private CartService cartService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -102,6 +104,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
        Optional<Customer>customer=customerRepository.findByUsername(username);
        Optional<Trader>trader=traderRepository.findByUsername(username);
        if(customer.isPresent()){
+
            return loginAsCustomer(username,password);
        } else if (admin.isPresent()) {
            return loginAsAdmin(username,password);
@@ -174,6 +177,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         customer.setFullName(customer.getFullName());
         customerRepository.save(customer);
         customer.setPassword(null);
+        cartService.createCartForCustomer(customer.getCustomerId());
         return modelMapper.map(customer,CustomerDTO.class);
 
     }

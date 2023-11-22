@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class TraderDTO extends UserDTO {
     private Long traderId;
     private final RoleEnum role=RoleEnum.ROLE_TRADER;
-    private ItemDTO itemDTO;
+    private ItemDTO item;
 
 }

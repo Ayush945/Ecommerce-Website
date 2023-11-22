@@ -21,7 +21,7 @@ public class CartItemController {
     public ResponseEntity<List<CartItemDTO>>getCartItem(@PathVariable("cartId")Long cartId){
         return ResponseEntity.ok().body(cartItemService.getCartItemsByCartId(cartId));
     }
-    @DeleteMapping("delete-cart-item")
+    @DeleteMapping("delete-cart-item/{itemId}")
     public ResponseEntity<String>deleteCartItem(@PathVariable("itemId")Long itemId){
         cartItemService.deleteCartItem(itemId);
         return ResponseEntity.ok().body("Item Deleted");

@@ -2,17 +2,17 @@ package com.example.FruitFlow.dto;
 
 import com.example.FruitFlow.entity.Cart;
 import com.example.FruitFlow.entity.Item;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class CartItemDTO {
     private Long cartItemId;
-    private CartDTO cartDTO;
-    private ItemDTO itemDTO;
+    private Integer quantity;
+    private CartDTO cart;
+    private ItemDTO item;
 }
