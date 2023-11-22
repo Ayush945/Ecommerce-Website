@@ -23,4 +23,6 @@ public class Item {
     @JoinColumn(name = "trader_id")
 
     private Trader trader;
+
+
 }

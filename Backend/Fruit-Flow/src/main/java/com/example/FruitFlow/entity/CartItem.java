@@ -1,6 +1,5 @@
 package com.example.FruitFlow.entity;
 
-import com.example.FruitFlow.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,18 +7,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-public class Customer extends User{
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
-    private final RoleEnum role=RoleEnum.ROLE_CUSTOMER;
+    private Long cartItemId;
+    private String quantity;
 
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "itemId")
+    private Item item;
 }
