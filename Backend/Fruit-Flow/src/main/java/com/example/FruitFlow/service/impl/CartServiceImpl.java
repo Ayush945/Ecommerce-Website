@@ -24,10 +24,7 @@ public class CartServiceImpl implements CartService {
     private CartRepository cartRepository;
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private CartItemService cartItemService;
-    @Autowired
-    private CartItemRepository cartItemRepository;
+
     @Override
     public CartDTO createCartForCustomer(Long customerId) {
         Cart cart=new Cart();
@@ -43,17 +40,6 @@ public class CartServiceImpl implements CartService {
     public CartDTO getCart(Long customerId) {
         Cart cart=cartRepository.findByCustomerCustomerId(customerId)
                 .orElseThrow(()->new RuntimeException("Customer not found"));
-        List<CartItemDTO>cartItemDTOS=cartItemService.getCartItemsByCartId(cart.getCartId());
-        double totalCartPrice=0.0;
-        for (CartItemDTO carItem:cartItemDTOS
-             ) {
-            if (carItem.getItemDTO().getItemPrice()!=null){
-                totalCartPrice=totalCartPrice+carItem.getItemDTO().getItemPrice();
-            }
-        }
-        cart.setTotalPrice(totalCartPrice);
-        cartRepository.save(cart);
-
         return modelMapper.map(cart,CartDTO.class);
     }
 }
