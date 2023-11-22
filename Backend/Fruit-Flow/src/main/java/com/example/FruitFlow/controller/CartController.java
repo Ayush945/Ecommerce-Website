@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
     @Autowired
     private CartService cartService;
-    @PostMapping("add-to-cart/{customerId}")
-    public ResponseEntity<CartItemDTO> addToCart(@PathVariable("customerId") Long customerId,@RequestBody CartItemDTO cartItemDTO){
-        return ResponseEntity.ok().body(cartService.addToCart(customerId,cartItemDTO));
+    @PostMapping("create-cart/{customerId}")
+    public ResponseEntity<CartDTO>createCartForCustomer(@PathVariable("customerId") Long customerId){
+        return ResponseEntity.ok().body(cartService.createCartForCustomer(customerId));
     }
+    @GetMapping("get-cart/{customerId}")
+    public ResponseEntity<CartDTO>getCart(@PathVariable("customerId") Long customerId){
+        return ResponseEntity.ok().body(cartService.getCart(customerId));
+    }
+
 }

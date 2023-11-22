@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CartDTO {
     private Long cartId;
-    private String quantity;
-    private String totalPrice;
-    private Customer customer;
+    private Integer quantity;
+    private Double totalPrice;
+    private CustomerDTO customerDTO;
 }

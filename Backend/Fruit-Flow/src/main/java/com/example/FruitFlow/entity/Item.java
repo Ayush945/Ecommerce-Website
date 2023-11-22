@@ -16,8 +16,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     private String itemName;
-    private String itemPrice;
-    private String itemQuantity;
+    private Double itemPrice;
+    private Integer itemQuantity;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trader_id")

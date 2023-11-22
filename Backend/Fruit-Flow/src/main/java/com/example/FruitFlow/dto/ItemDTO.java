@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ItemDTO {
     private Long itemId;
     private String itemName;
-    private String itemPrice;
-    private String itemQuantity;
+    private Double itemPrice;
+    private Integer itemQuantity;
 
 }
