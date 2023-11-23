@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import baseUrl from './CorsConfigure/BaseUrl';
 import axios from 'axios';
-
-import 'tailwindcss/tailwind.css'; // Import the tailwind CSS file
-
+import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 function FruitPage() {
     const [fruitData, setFruitData] = useState([]);
+    const [message, setMessage] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -21,6 +21,28 @@ function FruitPage() {
         fetchData();
     }, []);
 
+    const handleClick = (itemId) => {
+        const userData = Cookies.get('user')
+        const userDetail = JSON.parse(userData);
+
+        const postData = async () => {
+            try {
+                const apiEndpoint = `${baseUrl}cart-item/add-to-cart/${userDetail.customerId}/${itemId}`
+                console.log("Add to cart: ", apiEndpoint);
+                const response = await axios.post(apiEndpoint);
+                console.log(response.data)
+                setMessage(true);
+
+                setTimeout(() => {
+                    setMessage(false);
+                }, 2000);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        postData();
+    }
 
     return (
         <>
@@ -33,12 +55,28 @@ function FruitPage() {
                         <p className="text-gray-700">Quantity: {fruit.itemQuantity}</p>
                         <button
                             className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+                            onClick={() => handleClick(fruit.itemId)}
                         >
                             Add to Cart
                         </button>
+                        <Link to={'/cart'}><button
+                            className="ml-5 bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+
+                        >
+                            Go to Cart
+                        </button>
+                        </Link>
                     </div>
                 ))}
             </div>
+            {message ? (
+                <div className='text-green-400'>
+                    Item Added to cart
+                </div>
+
+            ) : (
+                <div></div>
+            )}
 
         </>
     );
