@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Entity for Relational Mapping.
+ * For Cart
+ * */
 @Entity
 @Data
 @AllArgsConstructor

@@ -4,6 +4,10 @@ import com.example.FruitFlow.entity.Cart;
 import com.example.FruitFlow.entity.Item;
 import lombok.*;
 
+/**
+ * DTO to transfer data.
+ * For Cart Item
+ * */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

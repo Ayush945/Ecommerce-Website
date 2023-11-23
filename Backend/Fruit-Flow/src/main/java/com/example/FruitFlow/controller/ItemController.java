@@ -7,7 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * Controller for item
+ * To get all items
+ * To get Items by Trader
+ * To add items by Trader
+ * To delete item by Trader
+ * */
 @RestController
 @RequestMapping("item")
 public class ItemController {
@@ -30,8 +36,8 @@ public class ItemController {
     public ResponseEntity<ItemDTO>addItem(@PathVariable ("traderId") Long traderId, @RequestBody ItemDTO itemDTO){
         return ResponseEntity.ok().body(itemService.addItem(traderId,itemDTO));
     }
-    @PutMapping("update-item")
-    public ResponseEntity<ItemDTO>updateItem(@RequestBody ItemDTO itemDTO){
-        return ResponseEntity.ok().body(itemService.updateItem(itemDTO));
+    @PutMapping("update-item/{traderId}")
+    public ResponseEntity<ItemDTO>updateItem(@PathVariable("traderId") Long traderId,@RequestBody ItemDTO itemDTO){
+        return ResponseEntity.ok().body(itemService.updateItem(traderId,itemDTO));
     }
 }

@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-
+/**
+ * Entity for Relational Mapping.
+ * For Trader
+ * */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

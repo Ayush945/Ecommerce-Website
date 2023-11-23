@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.MappedSuperclass;
-
+/**
+ * DTO to transfer data.
+ * For User
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass

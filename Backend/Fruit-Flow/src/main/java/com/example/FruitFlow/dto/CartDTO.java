@@ -2,7 +2,10 @@ package com.example.FruitFlow.dto;
 
 import com.example.FruitFlow.entity.Customer;
 import lombok.*;
-
+/**
+ * DTO to transfer data.
+ * For Cart
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

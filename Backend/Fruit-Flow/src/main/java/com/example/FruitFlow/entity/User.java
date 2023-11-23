@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.MappedSuperclass;
-
+/**
+ *For User
+ * */
 @Data
 @MappedSuperclass
 @AllArgsConstructor

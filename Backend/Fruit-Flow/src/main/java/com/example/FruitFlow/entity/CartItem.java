@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+/**
+ * Entity for Relational Mapping.
+ * For Cart Item
+ * */
 @Entity
 @Data
 @NoArgsConstructor

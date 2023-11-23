@@ -8,7 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-
+/**
+ * DTO to transfer data.
+ * For Login Request
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

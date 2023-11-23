@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * DTO to transfer data.
+ * For Trader
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

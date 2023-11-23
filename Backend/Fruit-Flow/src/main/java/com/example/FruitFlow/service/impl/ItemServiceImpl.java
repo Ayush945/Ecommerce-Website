@@ -49,9 +49,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTO updateItem(ItemDTO itemDTO) {
+    public ItemDTO updateItem(Long traderId,ItemDTO itemDTO) {
+
         Item item=modelMapper.map(itemDTO,Item.class);
-        Item existingItem=itemRepository.findById(item.getItemId())
+        Item existingItem=itemRepository.findByTraderTraderId(traderId)
                 .orElseThrow(()-> new RuntimeException("Item not found"));
         if(item.getItemName()!=null){
             existingItem.setItemName(item.getItemName());

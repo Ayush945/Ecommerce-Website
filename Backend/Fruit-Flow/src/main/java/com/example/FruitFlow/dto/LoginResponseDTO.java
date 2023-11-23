@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * DTO to transfer data.
+ * For Login Response
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

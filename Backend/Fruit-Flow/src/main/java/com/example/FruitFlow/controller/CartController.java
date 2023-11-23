@@ -7,7 +7,11 @@ import com.example.FruitFlow.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+/**
+ * Controller for cart,
+ * To create a cart
+ * To get a cart by customerId
+ * */
 @RestController
 @RequestMapping("cart")
 public class CartController {

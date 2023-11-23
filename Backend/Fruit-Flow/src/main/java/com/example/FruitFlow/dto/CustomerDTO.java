@@ -3,6 +3,10 @@ package com.example.FruitFlow.dto;
 import com.example.FruitFlow.enums.RoleEnum;
 import lombok.*;
 
+/**
+ * DTO to transfer data.
+ * For Customer
+ * */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
