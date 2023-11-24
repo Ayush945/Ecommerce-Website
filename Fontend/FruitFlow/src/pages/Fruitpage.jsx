@@ -44,6 +44,7 @@ function FruitPage() {
         postData();
     }
 
+
     return (
         <>
             <h1 className="text-3xl font-bold mb-4">Fruit Page</h1>
@@ -59,6 +60,7 @@ function FruitPage() {
                         >
                             Add to Cart
                         </button>
+
                         <Link to={'/cart'}><button
                             className="ml-5 bg-blue-500 text-white px-4 py-2 mt-4 rounded"
 
@@ -66,6 +68,8 @@ function FruitPage() {
                             Go to Cart
                         </button>
                         </Link>
+
+
                     </div>
                 ))}
             </div>
