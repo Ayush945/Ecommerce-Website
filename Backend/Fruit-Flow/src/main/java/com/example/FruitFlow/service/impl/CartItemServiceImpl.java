@@ -52,7 +52,7 @@ public class CartItemServiceImpl implements CartItemService {
             cart.setTotalPrice(item.getItemPrice() + totalPrice);
             cartRepository.save(cart);
             CartItem cartItem = new CartItem();
-            cartItem.setQuantity(1);
+            cartItem.setQuantity(50);
             cartItem.setItem(item);
             cartItem.setCart(cart);
             CartItem savedCartItem = cartItemRepository.save(cartItem);
