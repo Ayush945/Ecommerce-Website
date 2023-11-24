@@ -176,7 +176,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         customer.setAddress(customer.getAddress());
         customer.setFullName(customer.getFullName());
         customerRepository.save(customer);
-        customer.setPassword(null);
+//        customer.setPassword(null);
         cartService.createCartForCustomer(customer.getCustomerId());
         return modelMapper.map(customer,CustomerDTO.class);
 

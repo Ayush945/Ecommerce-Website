@@ -30,8 +30,10 @@ public class CartItemServiceImpl implements CartItemService {
     @Autowired
     private ItemRepository itemRepository;
     @Override
-    public List<CartItemDTO> getCartItemsByCartId(Long cartId) {
-        List<CartItem>cartItems=cartItemRepository.findByCartCartId(cartId);
+    public List<CartItemDTO> getCartItemsByCartId(Long customerId) {
+        Cart cart=cartRepository.findByCustomerCustomerId(customerId)
+                .orElseThrow(()->new RuntimeException("No cart found"));
+        List<CartItem>cartItems=cartItemRepository.findByCartCartId(cart.getCartId());
         return cartItems.stream()
                 .map(cartItem -> modelMapper.map(cartItem,CartItemDTO.class))
                 .collect(Collectors.toList());
@@ -49,7 +51,6 @@ public class CartItemServiceImpl implements CartItemService {
             Double totalPrice = cart.getTotalPrice();
             cart.setTotalPrice(item.getItemPrice() + totalPrice);
             cartRepository.save(cart);
-
             CartItem cartItem = new CartItem();
             cartItem.setQuantity(1);
             cartItem.setItem(item);
@@ -60,10 +61,12 @@ public class CartItemServiceImpl implements CartItemService {
         }
     }
     @Override
-    public void deleteCartItem(Long itemId){
-        CartItem cartItem=cartItemRepository.findByItemItemId(itemId)
+    public void deleteCartItem(Long cartItemId){
+        CartItem cartItem=cartItemRepository.findById(cartItemId)
                 .orElseThrow(()->new RuntimeException("Not Found"));
         cartItemRepository.delete(cartItem);
     }
+
+
 
 }

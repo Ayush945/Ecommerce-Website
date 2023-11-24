@@ -21,13 +21,13 @@ public class CartItemController {
     public ResponseEntity<CartItemDTO>addToCart(@PathVariable("customerId") Long customerId,@PathVariable("itemId") Long itemId){
         return ResponseEntity.ok().body(cartItemService.addItemToCart(customerId,itemId));
     }
-    @GetMapping("get-cart-item")
-    public ResponseEntity<List<CartItemDTO>>getCartItem(@PathVariable("cartId")Long cartId){
-        return ResponseEntity.ok().body(cartItemService.getCartItemsByCartId(cartId));
+    @GetMapping("get-cart-item/{customerId}")
+    public ResponseEntity<List<CartItemDTO>>getCartItem(@PathVariable("customerId")Long customerId){
+        return ResponseEntity.ok().body(cartItemService.getCartItemsByCartId(customerId));
     }
-    @DeleteMapping("delete-cart-item/{itemId}")
-    public ResponseEntity<String>deleteCartItem(@PathVariable("itemId")Long itemId){
-        cartItemService.deleteCartItem(itemId);
+    @DeleteMapping("delete-cart-item/{cartItemId}")
+    public ResponseEntity<String>deleteCartItem(@PathVariable("cartItemId")Long cartItemId){
+        cartItemService.deleteCartItem(cartItemId);
         return ResponseEntity.ok().body("Item Deleted");
     }
 }
